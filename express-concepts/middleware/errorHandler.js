@@ -1,39 +1,39 @@
-//custom error class
-
+// custom error class
 class APIError extends Error {
   constructor(message, statusCode) {
     super(message);
     this.statusCode = statusCode;
-    this.name = "APIError"; //set the error type to API Error
+    this.name = "APIError";
   }
 }
 
+// async wrapper
 const asyncHandler = (fn) => (req, res, next) => {
   Promise.resolve(fn(req, res, next)).catch(next);
 };
 
+// global error handler
 const globalErrorhandler = (err, req, res, next) => {
-  console.error(err.stack); //log the erro stack
+  console.error(err.stack);
 
   if (err instanceof APIError) {
     return res.status(err.statusCode).json({
-      status: "Error",
+      status: "error",
       message: err.message,
     });
   }
 
-  //handle mongoose validation ->
-  else if (err.name === "validationError") {
+  if (err.name === "ValidationError") {
     return res.status(400).json({
       status: "error",
-      message: "validation Error",
-    });
-  } else {
-    return res.status(500).json({
-      status: "error",
-      message: "An unexpected error occured",
+      message: "Validation error",
     });
   }
+
+  return res.status(500).json({
+    status: "error",
+    message: "An unexpected error occurred",
+  });
 };
 
 module.exports = { APIError, asyncHandler, globalErrorhandler };
