@@ -2,7 +2,7 @@
 
 const urlVersioning = (version)=>(req,res,next)=>{
     // checck if teh request started with particular version or not 
-    if(req.path.startWith(`/api/${version}`)){
+    if(req.path.startsWith(`/api/${version}`)){
         next()
     }else{
         res.status(404).json({
