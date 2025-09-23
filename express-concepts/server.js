@@ -1,8 +1,12 @@
+// major release -> API (api versioning ) -> V1, V2,V3
+
+
 require('dotenv').config()
 const express = require('express')
 
 const {configureCors} = require('./config/corsConfig')
 const { requestLogger, addTimeStamp } = require('./middleware/customeMiddleware')
+const { globalErrorhandler } = require('./middleware/errorHandler')
 
 const app = express()
 const PORT = process.env.PORT || 3000
@@ -14,6 +18,7 @@ app.use(addTimeStamp)
 
 app.use(configureCors())
 app.use(express.json())
+app.use(globalErrorhandler())
 
 
 
