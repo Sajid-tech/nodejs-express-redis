@@ -58,7 +58,30 @@ async function redisDataStructure() {
     // const remaingNotes = await client.lRange('notes',0,-1)
     // console.log(remaingNotes)
 
-    
+    {
+      /*
+        set->
+        1.SADD ( this will add one or more member to a set )
+        2.SMEMBERS ( return all member of set)
+        3. SISMEMBER( will check is particular member is exist or not in set)
+        4.SREM( remove one or more member from the set)
+        
+        */
+    }
+
+    // await client.sAdd('user:nickname',['jhon','deepa','xyz'])
+
+    // const extractUserNickname = await client.sMembers('user:nickname')
+    // console.log(extractUserNickname)
+
+    // check if deepa is present in this member or not 
+
+    // const isDeepaIsOneOfUserNickname = await client.sIsMember('user:nickname','deepa')
+    // console.log(isDeepaIsOneOfUserNickname)
+
+    // await client.SREM('user:nickname','xyz')
+    // const getUpdatedUserNickname = await client.sMembers('user:nickname')
+    // console.log(getUpdatedUserNickname)
   } catch (error) {
     console.error(error);
   } finally {
