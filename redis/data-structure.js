@@ -82,6 +82,77 @@ async function redisDataStructure() {
     // await client.SREM('user:nickname','xyz')
     // const getUpdatedUserNickname = await client.sMembers('user:nickname')
     // console.log(getUpdatedUserNickname)
+
+
+
+
+
+    {/*
+        
+        sorted sets->
+     between set and sorted set , diff is in sorted set  elements u are having each element has a sorted set associated with that
+     
+     the score descide the order of elements inside the set
+
+     think of it like a ranking system(leaderboards , top scores , priority queues)
+
+
+     1.ZADD (add element with score)
+     2.ZRANGE ( reterive the element)
+     3.ZRANk ( rank or give u the position of the lement)
+     4.ZREM (  remove one or more element)
+        
+
+        */}
+
+        {/*
+        await client.zAdd('cart',[
+            {
+                score:100, value:'Cart 1'
+            },
+            {
+                score:150, value:'Cart 2'
+            },
+            {
+                score:10, value:'Cart 3'
+            },
+        ])
+
+    
+
+        const getZSortedList = await client.zRange('cart',0,-1)
+        console.log(getZSortedList) // get in asc order
+
+
+        exctractAllCartItemWithScore = await client.zRangeWithScores('cart',0,-1)
+
+        console.log(exctractAllCartItemWithScore)
+
+
+
+        const cartTwoRank = await client.zRank('cart','Cart 2')
+
+        console.log(cartTwoRank) // give u the position
+
+        await client.zRem('cart', 'Cart 2')
+
+        const getUpdateCart = await client.zRange('cart',0,-1)
+        console.log(getUpdateCart)
+ */}
+
+ {/*
+    hashes ->hashes are like maps/dictonaries where you can store field value pairs under a single key
+    
+    useful for representing an object(like a user profile , product etc)
+
+
+
+
+    1. HSET (set a field in a hash to a value)
+    2. HGET (get the value of specific field)
+    3. HGETALL (get all fields and value in a hash)
+    4. HDEL (delete one or more field from a hash)
+    */}
   } catch (error) {
     console.error(error);
   } finally {
