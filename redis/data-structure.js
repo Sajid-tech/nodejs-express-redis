@@ -147,12 +147,31 @@ async function redisDataStructure() {
 
 
 
-
+2:23
     1. HSET (set a field in a hash to a value)
     2. HGET (get the value of specific field)
     3. HGETALL (get all fields and value in a hash)
     4. HDEL (delete one or more field from a hash)
     */}
+
+
+    await client.hSet('product:1',{
+      name:'Product 1',
+      description:'product one description',
+      rating:'5'
+    })
+
+
+    const getProductRating = await client.hGet('product:1','rating')
+    console.log(getProductRating)
+
+    const getProductAll = await client.hGetAll('product:1')
+
+    console.log(getProductAll)
+
+    await client.hDel('product:1','rating')
+    updatedProductDetails = await client.hGetAll('product:1')
+    console.log(updatedProductDetails)
   } catch (error) {
     console.error(error);
   } finally {
